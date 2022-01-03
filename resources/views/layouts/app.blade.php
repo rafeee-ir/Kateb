@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 
 <head>
     <meta charset="utf-8">
@@ -14,8 +14,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+{{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
+{{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -40,7 +40,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -61,11 +61,11 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('خروج') }}
                                         </a>
                                     </li>
 
@@ -81,7 +81,36 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 mb-3">
+{{--                        <div class="card">--}}
+{{--                            <div class="card-header">{{ __('منو') }}</div>--}}
+{{--                            <div class="card-body">--}}
+                                <div class="list-group">
+                                    <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
+                                        داشبورد
+                                    </a>
+                                    <a href="{{ route('setting') }}" class="list-group-item list-group-item-action">تنظیمات</a>
+{{--                                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>--}}
+                                </div>
+                                <div class="list-group mt-3">
+                                    <a href="#" class="list-group-item list-group-item-action disabled">پروژه ها</a>
+                                    <a href="#" class="list-group-item list-group-item-action disabled">همکاران</a>
+                                </div>
+                                <div class="list-group mt-3">
+                                    <a href="#" class="list-group-item list-group-item-action disabled">فاکتورها</a>
+                                    <a href="{{ route('users') }}" class="list-group-item list-group-item-action">کاربران</a>
+                                </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+                        </div>
+                    <div class="col-lg-9">
+                    @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
