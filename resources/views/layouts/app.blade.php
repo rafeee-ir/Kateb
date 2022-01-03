@@ -83,6 +83,8 @@
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
+                    @guest
+                    @else
                     <div class="col-lg-3 mb-3">
 {{--                        <div class="card">--}}
 {{--                            <div class="card-header">{{ __('منو') }}</div>--}}
@@ -106,6 +108,7 @@
 {{--                        </div>--}}
 
                         </div>
+                    @endguest
                     <div class="col-lg-9">
                     @yield('content')
                     </div>
