@@ -35,7 +35,8 @@ class HomeController extends Controller
     public function setting()
     {
         $user = Auth::user();
-        return view('setting', compact('user'));
+        $pageTitle = 'تنظیمات کاربری ' . Auth::user()->name;
+        return view('setting', compact('user','pageTitle'));
     }
     /**
      * Show all users
@@ -45,7 +46,8 @@ class HomeController extends Controller
     public function users()
     {
         $users = User::all();
-        return view('users', compact('users'));
+        $pageTitle = 'لیست کاربران';
+        return view('users', compact('users','pageTitle'));
     }
     /**
      * Show a user
@@ -55,6 +57,7 @@ class HomeController extends Controller
     public function user($id)
     {
         $user = User::findorfail($id);
-        return view('setting', compact('user'));
+        $pageTitle= 'پروفایل ' . $user->name;
+        return view('setting', compact('user','pageTitle'));
     }
 }
