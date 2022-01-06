@@ -97,7 +97,8 @@
                                     <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
                                         داشبورد
                                     </a>
-                                    <a href="{{ route('setting') }}" class="list-group-item list-group-item-action">تنظیمات</a>
+                                    <a href="{{url('/user').'/'.Auth::id()}}" class="list-group-item list-group-item-action">پروفایل من</a>
+                                    <a href="{{ route('myActivities') }}" class="list-group-item list-group-item-action">فعالیت های من</a>
 {{--                                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>--}}
                                 </div>
                                 <div class="list-group mt-3">
@@ -107,6 +108,8 @@
                                 <div class="list-group mt-3">
                                     <a href="#" class="list-group-item list-group-item-action disabled">فاکتورها</a>
                                     <a href="{{ route('users') }}" class="list-group-item list-group-item-action">کاربران</a>
+                                    <a href="{{ route('activities') }}" class="list-group-item list-group-item-action">فعالیت ها</a>
+
                                 </div>
 {{--                            </div>--}}
 {{--                        </div>--}}
