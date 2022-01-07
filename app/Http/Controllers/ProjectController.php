@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\log;
+use App\Models\Project;
+use App\Models\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +17,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        foreach ($users as $user){
-            $user->created_at = new Verta($user->created_at);
+        $projects = Project::all()->sortByDesc('created_at');
+        foreach ($projects as $p){
+            $v = new Verta($p->created_at);
+            $t = $v->formatDifference();
+            $p->when = $t;
+            $p->created_at = new Verta($p->created_at);
         }
-        $pageTitle = 'لیست کاربران';
-        return view('users', compact('users','pageTitle'));
+        $pageTitle = 'پروژه ها';
+
+        return view('projects.index',compact('projects','pageTitle'));
     }
 
     /**
@@ -30,7 +36,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all()->sortBy('name');
+        $pageTitle = 'افزودن پروژه';
+//        dd($users);
+        return view('projects.create',compact('pageTitle','users'));
     }
 
     /**
@@ -47,24 +56,21 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        $user = User::findorfail($id);
-        $user->created_at = new Verta($user->created_at);
-        $pageTitle= 'پروفایل ' . $user->name;
-        return view('profile', compact('user','pageTitle'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
         //
     }
@@ -73,10 +79,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -84,10 +90,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
         //
     }

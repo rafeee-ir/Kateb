@@ -20,6 +20,7 @@ class LogController extends Controller
         foreach ($logs as $log){
             $v = new Verta($log->created_at);
             $t = $v->formatDifference();
+            $log->created_at = new Verta($log->created_at);
             $log->when = $t;
         }
         $pageTitle = 'فعالیت ها';
@@ -100,6 +101,8 @@ class LogController extends Controller
             $v = new Verta($log->created_at);
             $t = $v->formatDifference();
             $log->when = $t;
+            $log->created_at = new Verta($log->created_at);
+
         }
         $user = Auth::user();
         $pageTitle = 'فعالیت های من';

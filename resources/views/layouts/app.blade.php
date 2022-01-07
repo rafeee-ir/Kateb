@@ -102,11 +102,12 @@
 {{--                                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>--}}
                                 </div>
                                 <div class="list-group mt-3">
-                                    <a href="#" class="list-group-item list-group-item-action disabled">پروژه ها</a>
-                                    <a href="#" class="list-group-item list-group-item-action disabled">همکاران</a>
+                                    <a href="{{ route('projects.index') }}" class="list-group-item list-group-item-action">پروژه ها</a>
+                                    <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">همکاران</a>
+                                    <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">فاکتورها</a>
+
                                 </div>
                                 <div class="list-group mt-3">
-                                    <a href="#" class="list-group-item list-group-item-action disabled">فاکتورها</a>
                                     <a href="{{ route('users') }}" class="list-group-item list-group-item-action">کاربران</a>
                                     <a href="{{ route('activities') }}" class="list-group-item list-group-item-action">فعالیت ها</a>
 

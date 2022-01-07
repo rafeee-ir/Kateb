@@ -18,9 +18,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/activities', [App\Http\Controllers\LogController::class, 'index'])->name('activities');
-Route::get('/activities/me', [App\Http\Controllers\LogController::class, 'myActivities'])->name('myActivities');
-Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
-Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user.show');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/activities', [App\Http\Controllers\LogController::class, 'index'])->name('activities');
+    Route::get('/activities/me', [App\Http\Controllers\LogController::class, 'myActivities'])->name('myActivities');
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+    Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user.show');
+
+//Projects
+    Route::resource('projects', \App\Http\Controllers\ProjectController::class);
+//Route::get('/projects', [\App\Http\Controllers\ProjectController::class,'index'])->name('projects');
+});
