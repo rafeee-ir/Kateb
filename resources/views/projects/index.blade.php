@@ -26,15 +26,19 @@
                                         <th>نام</th>
                                         <th>شرح</th>
                                         <th>تاریخ</th>
+                                        <th>شروع</th>
+                                        <th>پایان</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @if(count($projects)>0)
                                 @foreach ($projects as $project)
                                     <tr>
-                                    <th>{{$project->title}}</th>
+                                    <th><a href="{{route('projects.show',$project->id)}}">{{$project->id}}.{{$project->title}}</a></th>
                                     <td>{{$project->description}}</td>
                                     <td>{{$project->when}}</td>
+                                    <td>{{$project->start}}</td>
+                                    <td>{{$project->end}}</td>
                                 </tr>
                                 @endforeach
                                 @else

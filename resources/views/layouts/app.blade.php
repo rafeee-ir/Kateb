@@ -32,6 +32,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <span></span>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -67,6 +69,17 @@
 
                                 <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
                                     <li>
+                                        <a class="dropdown-item" href="{{url('/user').'/'.Auth::id()}}">
+                                            {{ __('پروفایل من') }}
+                                        </a>
+                                    </li>
+                                      <li>
+                                        <a class="dropdown-item" href="{{ route('myActivities') }}">
+                                            {{ __('فعالیتهای من') }}
+                                        </a>
+                                    </li>
+
+                                    <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             {{ __('خروج') }}
@@ -86,6 +99,7 @@
 
         <main class="py-4">
             <div class="container">
+
                 <div class="row justify-content-center">
                     @guest
                     @else
@@ -94,15 +108,23 @@
 {{--                            <div class="card-header">{{ __('منو') }}</div>--}}
 {{--                            <div class="card-body">--}}
                                 <div class="list-group">
+                                    <a href="#" id="time" class="list-group-item list-group-item-action disabled">
+                                    </a>
                                     <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
                                         داشبورد
                                     </a>
-                                    <a href="{{url('/user').'/'.Auth::id()}}" class="list-group-item list-group-item-action">پروفایل من</a>
-                                    <a href="{{ route('myActivities') }}" class="list-group-item list-group-item-action">فعالیت های من</a>
+{{--                                    <a href="{{url('/user').'/'.Auth::id()}}" class="list-group-item list-group-item-action">پروفایل من</a>--}}
+{{--                                    <a href="{{ route('myActivities') }}" class="list-group-item list-group-item-action">فعالیت های من</a>--}}
 {{--                                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>--}}
                                 </div>
                                 <div class="list-group mt-3">
                                     <a href="{{ route('projects.index') }}" class="list-group-item list-group-item-action">پروژه ها</a>
+                                    <a href="{{ route('projects.create') }}" class="list-group-item list-group-item-action">پروژه جدید</a>
+
+
+                                </div>
+                                <div class="list-group mt-3">
+
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">همکاران</a>
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">فاکتورها</a>
 
@@ -115,6 +137,24 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
+                        <script type="text/javascript">
+                            function showTime() {
+                                var date = new Date(),
+                                    utc = new Date(Date.now(
+                                        date.getFullYear(),
+                                        date.getMonth(),
+                                        date.getDate(),
+                                        date.getHours(),
+                                        date.getMinutes(),
+                                        date.getSeconds()
+                                    ));
+
+                                document.getElementById('time').innerHTML = utc.toLocaleTimeString();
+                            }
+                            showTime();
+
+                            // setInterval(showTime, 1000);
+                        </script>
                         </div>
                     @endguest
                     <div class="col-lg-9">

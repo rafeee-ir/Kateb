@@ -26,11 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Log::create([
-            'code' => 1,
-            'log' => 'visit home',
-            'user_id' => Auth::id()
-        ]);
+
         return view('home');
     }
 
