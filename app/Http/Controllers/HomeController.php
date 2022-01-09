@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\log;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        return view('home');
+        $projects_active = Project::all()->where('ended',0)->count();
+        $projects_ended = Project::all()->where('ended',1)->count();
+        return view('home',compact('projects_active','projects_ended'));
     }
 
 }

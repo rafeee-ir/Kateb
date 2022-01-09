@@ -1,55 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    پروژه های فعال
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <div class="row">
+                        @foreach ($projects as $project)
+                            <div class="col-sm-4 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$project->title}}</h5>
+                                        <p class="card-text">{{Str::limit($project->description,40)}}</p>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="{{route('projects.create')}}" type="button" class="btn btn-link">+</a>
-                        </div>
-                        {{ $pageTitle }}
-                        <span class="badge bg-primary">{{ count($projects) }}</span>
+                                    </div>
 
+                                    <div class="card-footer text-muted">
+                                        {{$project->when}}
+                                        <div class="d-grid gap-2">
 
-                    </div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                            <a href="{{route('projects.show',$project->id)}}" class="btn btn-sm btn-link">مشاهده</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        @endif
+                        @endforeach
+                        <div class="col-sm-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">پروژه جدید</h5>
+                                    <p class="card-text">...</p>
 
-                            <table class="table table-hover table-borderless table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>نام</th>
-                                        <th>شرح</th>
-                                        <th>تاریخ</th>
-                                        <th>شروع</th>
-                                        <th>پایان</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @if(count($projects)>0)
-                                @foreach ($projects as $project)
-                                    <tr>
-                                    <th><a href="{{route('projects.show',$project->id)}}">{{$project->id}}.{{$project->title}}</a></th>
-                                    <td>{{$project->description}}</td>
-                                    <td>{{$project->when}}</td>
-                                    <td>{{$project->start}}</td>
-                                    <td>{{$project->end}}</td>
-                                </tr>
-                                @endforeach
-                                @else
-                                    <tr class="table-warning">
-                                        <td colspan="3">هیچ پروژه ای ندارید</td>
-                                    </tr>
-                                @endif
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-grid gap-2">
 
-                                </tbody>
-                            </table>
+                                        <a href="{{route('projects.create')}}" class="btn btn-outline-success">افزودن</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    آرشیو
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                    <div class="row">
+                        @foreach ($projects_ended as $project)
+                            <div class="col-sm-4 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$project->title}}</h5>
+                                        <p class="card-text">{{Str::limit($project->description,40)}}</p>
 
+                                    </div>
+
+                                    <div class="card-footer text-muted">
+                                        {{$project->when}}
+                                        <div class="d-grid gap-2">
+
+                                            <a href="{{route('projects.show',$project->id)}}" class="btn btn-sm btn-link">مشاهده</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -103,7 +103,7 @@
                 <div class="row justify-content-center">
                     @guest
                     @else
-                    <div class="col-lg-3 mb-3">
+                    <div class="col-lg-2 mb-3">
 {{--                        <div class="card">--}}
 {{--                            <div class="card-header">{{ __('منو') }}</div>--}}
 {{--                            <div class="card-body">--}}
@@ -157,7 +157,7 @@
                         </script>
                         </div>
                     @endguest
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
                     @yield('content')
                     </div>
                 </div>

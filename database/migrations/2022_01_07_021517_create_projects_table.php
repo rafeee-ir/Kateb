@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProjectsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -23,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->date('end_date')->nullable();
             $table->boolean('ended')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

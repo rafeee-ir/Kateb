@@ -18,8 +18,17 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all()->sortByDesc('created_at');
+        $projects = Project::all()->where('ended',0)->sortByDesc('created_at');
         foreach ($projects as $p){
+            $v = new Verta($p->created_at);
+            $t = $v->formatDifference();
+            $p->when = $t;
+            $p->created_at = new Verta($p->created_at);
+            $p->start = new Verta($p->start_date);
+            $p->end = new Verta($p->end_date);
+        }
+        $projects_ended = Project::all()->where('ended',1)->sortByDesc('created_at');
+        foreach ($projects_ended as $p){
             $v = new Verta($p->created_at);
             $t = $v->formatDifference();
             $p->when = $t;
@@ -29,7 +38,7 @@ class ProjectController extends Controller
         }
         $pageTitle = 'پروژه ها';
 
-        return view('projects.index',compact('projects','pageTitle'));
+        return view('projects.index',compact('projects','projects_ended','pageTitle'));
     }
 
     /**
@@ -94,11 +103,14 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Project $project)
     {
-        //
+        $users = User::all()->sortBy('name');
+        $pageTitle = 'ویرایش پروژه';
+
+        return view('projects.edit',compact('pageTitle','users','project'));
     }
 
     /**
@@ -110,7 +122,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $alert = '';
         if ($request->exists('ended')&&$project->ended === 0) {
             Log::create([
                 'code' => 109,
@@ -127,6 +138,15 @@ class ProjectController extends Controller
                 'user_id' => Auth::id()
             ]);
             $alert = 'ثبت سروع مجدد پروژه با موفقیت  انجام گرفت';
+        }else{
+            Log::create([
+                'code' => 102,
+                'log' => 'ویرایش پروژه توسط ' . Auth::user()->name,
+                'project_id' => $project->id,
+                'user_id' => Auth::id()
+            ]);
+            $alert = 'پروژه با موفقیت ویرایش شد';
+
         }
 
         $project->update($request->all());
@@ -144,7 +164,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-
+        Log::create([
+            'code' => 108,
+            'log' => 'حذف پروژه توسط ' . Auth::user()->name,
+            'project_id' => $project->id,
+            'user_id' => Auth::id()
+        ]);
         return redirect()->route('projects.index')
             ->with('status','Projects deleted successfully');
     }
