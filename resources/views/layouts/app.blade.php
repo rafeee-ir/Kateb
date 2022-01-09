@@ -125,6 +125,7 @@
                                 </div>
                                 <div class="list-group mt-3">
 
+                                    <a href="{{route('portfolios.index')}}" class="list-group-item list-group-item-action">نمونه کارها</a>
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">همکاران</a>
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">فاکتورها</a>
 

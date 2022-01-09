@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\log;
+use App\Models\Portfolio;
 use App\Models\Project;
 use App\Models\User;
 use Hekmatinasser\Verta\Verta;
@@ -76,7 +77,8 @@ class ProjectController extends Controller
         ]);
 
         return redirect()->route('projects.show',$project->id)
-            ->with('status','Project created successfully.');    }
+            ->with('status','Project created successfully.');
+    }
 
     /**
      * Display the specified resource.
@@ -102,7 +104,8 @@ class ProjectController extends Controller
             $c->when = new Verta($c->created_at);
             $c->when = $c->when->formatDifference();
         }
-        return (view('projects.show' , compact('pageTitle','comments','project','logs')));
+        $portfolios = Portfolio::all()->where('project_id',$id)->sortByDesc('created_at');
+        return (view('projects.show' , compact('pageTitle','portfolios','comments','project','logs')));
     }
 
     /**

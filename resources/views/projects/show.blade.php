@@ -94,6 +94,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            نمونه کارها
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#setting">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                @forelse($portfolios as $portfolio)
+                                    <div class="col">
+                                        <div class="card h-100 text-center">
+                                            <img src="@if($portfolio->pic!==null){{url('/img/'.$portfolio->pic)}}@else{{url('/img/ph.jpg')}}@endif" class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <p class="card-text">{{$portfolio->description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="col">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-body">
+                                                <p class="card-text">هیچ نمونه کاری نیست</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
