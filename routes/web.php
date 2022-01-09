@@ -30,4 +30,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('projects', \App\Http\Controllers\ProjectController::class);
     Route::resource('comments', \App\Http\Controllers\CommentController::class);
     Route::resource('portfolios', \App\Http\Controllers\PortfolioController::class);
+    Route::resource('tasks', \App\Http\Controllers\TaskController::class);
 });

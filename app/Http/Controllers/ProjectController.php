@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\log;
 use App\Models\Portfolio;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -105,7 +106,8 @@ class ProjectController extends Controller
             $c->when = $c->when->formatDifference();
         }
         $portfolios = Portfolio::all()->where('project_id',$id)->sortByDesc('created_at');
-        return (view('projects.show' , compact('pageTitle','portfolios','comments','project','logs')));
+        $tasks = Task::all()->where('project_id',$id)->sortByDesc('created_at');
+        return (view('projects.show' , compact('pageTitle','tasks','portfolios','comments','project','logs')));
     }
 
     /**
