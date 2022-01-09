@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\log;
 use App\Models\Project;
 use App\Models\User;
@@ -69,7 +70,7 @@ class ProjectController extends Controller
         $project = Project::create($request->all());
         Log::create([
             'code' => 100,
-            'log' => 'ایجاد پروژه توسط '.Auth::user()->name,
+            'log' => 'ایجاد پروژه '.$project->id.' توسط '.Auth::user()->name,
             'project_id' => $project->id,
             'user_id' => Auth::id()
         ]);
@@ -96,7 +97,12 @@ class ProjectController extends Controller
             $log->when = new Verta($log->created_at);
             $log->when = $log->when->formatDifference();
         }
-        return (view('projects.show' , compact('pageTitle','project','logs')));
+        $comments = Comment::all()->where('project_id',$id)->sortByDesc('created_at');
+        foreach ($comments as $c){
+            $c->when = new Verta($c->created_at);
+            $c->when = $c->when->formatDifference();
+        }
+        return (view('projects.show' , compact('pageTitle','comments','project','logs')));
     }
 
     /**
@@ -125,7 +131,7 @@ class ProjectController extends Controller
         if ($request->exists('ended')&&$project->ended === 0) {
             Log::create([
                 'code' => 109,
-                'log' => 'اعلام پایان پروژه توسط ' . Auth::user()->name,
+                'log' => 'اعلام پایان پروژه '.$project->id.' توسط '. Auth::user()->name,
                 'project_id' => $project->id,
                 'user_id' => Auth::id()
             ]);
@@ -133,7 +139,7 @@ class ProjectController extends Controller
         }elseif ($request->exists('ended')&&$project->ended === 1){
             Log::create([
                 'code' => 101,
-                'log' => 'شروع مجدد پروژه توسط ' . Auth::user()->name,
+                'log' => 'شروع مجدد پروژه '.$project->id.' توسط '. Auth::user()->name,
                 'project_id' => $project->id,
                 'user_id' => Auth::id()
             ]);
@@ -141,7 +147,7 @@ class ProjectController extends Controller
         }else{
             Log::create([
                 'code' => 102,
-                'log' => 'ویرایش پروژه توسط ' . Auth::user()->name,
+                'log' => 'ویرایش پروژه '.$project->id.' توسط '. Auth::user()->name,
                 'project_id' => $project->id,
                 'user_id' => Auth::id()
             ]);

@@ -16,7 +16,7 @@
     @endif
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
 
 
@@ -27,7 +27,31 @@
 
                 </div>
             </div>
-            <div class="accordion mt-3" id="setting">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="{{route('comments.store')}}" method="post"  autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                        <input type="hidden" name="project_id" value="{{$project->id}}">
+                        <div class="input-group input-group-sm mb-3">
+                            <input  autocomplete="off" type="text" class="form-control" placeholder="بنویسید..." name="comment">
+                        </div>
+                    </form>
+
+                    @forelse($comments as $comment)
+                        <div class="mb-2">
+                            <div class="d-inline-block px-3 py-1" style="border-radius: 15px 0 15px 15px;background-color: #eeeeee">
+                                <span class="text-sm">{{$comment->comment}}</span>
+                            </div>
+                            <span class="badge bg-light text-secondary rounded-pill">{{$comment->when}}</span>
+
+                        </div>
+                        @empty
+                            <p class="text-sm">اولین نظر را بنویسید</p>
+                            @endforelse
+                </div>
+            </div>
+            <div class="accordion" id="setting">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">

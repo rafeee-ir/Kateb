@@ -28,4 +28,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 //Projects
     Route::resource('projects', \App\Http\Controllers\ProjectController::class);
+    Route::resource('comments', \App\Http\Controllers\CommentController::class);
 });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,7 +37,15 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = Comment::create($request->all());
+        Log::create([
+            'code' => 106,
+            'log' => 'درج نظر توسط '.Auth::user()->name.' در پروژه '.$comment->project_id,
+            'project_id' => $comment->project_id,
+            'user_id' => $comment->user_id
+        ]);
+        return redirect()->back();
+
     }
 
     /**
