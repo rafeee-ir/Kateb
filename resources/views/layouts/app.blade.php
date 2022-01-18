@@ -15,7 +15,6 @@
     </title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
@@ -108,8 +107,8 @@
 {{--                            <div class="card-header">{{ __('منو') }}</div>--}}
 {{--                            <div class="card-body">--}}
                                 <div class="list-group">
-                                    <a href="#" id="time" class="list-group-item list-group-item-action disabled">
-                                    </a>
+{{--                                    <a href="#" id="time" class="list-group-item list-group-item-action disabled">--}}
+{{--                                    </a>--}}
                                     <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
                                         داشبورد
                                     </a>
@@ -138,24 +137,24 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
-                        <script type="text/javascript">
-                            function showTime() {
-                                var date = new Date(),
-                                    utc = new Date(Date.now(
-                                        date.getFullYear(),
-                                        date.getMonth(),
-                                        date.getDate(),
-                                        date.getHours(),
-                                        date.getMinutes(),
-                                        date.getSeconds()
-                                    ));
+{{--                        <script type="text/javascript">--}}
+{{--                            function showTime() {--}}
+{{--                                var date = new Date(),--}}
+{{--                                    utc = new Date(Date.now(--}}
+{{--                                        date.getFullYear(),--}}
+{{--                                        date.getMonth(),--}}
+{{--                                        date.getDate(),--}}
+{{--                                        date.getHours(),--}}
+{{--                                        date.getMinutes(),--}}
+{{--                                        date.getSeconds()--}}
+{{--                                    ));--}}
 
-                                document.getElementById('time').innerHTML = utc.toLocaleTimeString();
-                            }
-                            showTime();
+{{--                                document.getElementById('time').innerHTML = utc.toLocaleTimeString();--}}
+{{--                            }--}}
+{{--                            showTime();--}}
 
-                            // setInterval(showTime, 1000);
-                        </script>
+{{--                            // setInterval(showTime, 1000);--}}
+{{--                        </script>--}}
                         </div>
                     @endguest
                     <div class="col-lg-10">
@@ -165,6 +164,8 @@
             </div>
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 
 </html>

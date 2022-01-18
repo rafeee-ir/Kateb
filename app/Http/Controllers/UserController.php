@@ -91,4 +91,22 @@ class UserController extends Controller
     {
         //
     }
+
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
+     */
+    public function getVueUsersAll()
+    {
+        $users = User::all()->sortBy('name');
+        foreach ($users as $user){
+            $user->created_at = new Verta($user->created_at);
+        }
+        return $users;
+    }
 }

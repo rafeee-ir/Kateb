@@ -31,4 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('comments', \App\Http\Controllers\CommentController::class);
     Route::resource('portfolios', \App\Http\Controllers\PortfolioController::class);
     Route::resource('tasks', \App\Http\Controllers\TaskController::class);
+
+
+
+//Vue Routes
+    Route::get('/vue/users/all',[\App\Http\Controllers\UserController::class,'getVueUsersAll']);
+
 });
+
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

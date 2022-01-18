@@ -54,31 +54,32 @@
             <div class="card mb-3">
                 <div class="card-header">وظایف</div>
                 <div class="card-body">
-                    <form action="{{route('tasks.store')}}" method="post"  autocomplete="off">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
-                        <input type="hidden" name="project_id" value="{{$project->id}}">
-                        <div class="input-group input-group-sm mb-3">
-                            <input  autocomplete="off" type="text" class="form-control" placeholder="کارهایی که باید انجام شود..." name="task">
-                        </div>
-                    </form>
+                    <tasks></tasks>
+{{--                    <form action="{{route('tasks.store')}}" method="post"  autocomplete="off">--}}
+{{--                        @csrf--}}
+{{--                        <input type="hidden" name="user_id" value="{{Auth::id()}}">--}}
+{{--                        <input type="hidden" name="project_id" value="{{$project->id}}">--}}
+{{--                        <div class="input-group input-group-sm mb-3">--}}
+{{--                            <input  autocomplete="off" type="text" class="form-control" placeholder="کارهایی که باید انجام شود..." name="task">--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
 
-                    @forelse($tasks as $task)
-                        <div class="mb-2">
-                            <div class="d-block px-3 py-1 bg-light" style="border-radius: 15px 15px 15px 15px">
-                                <div class="d-inline-block">
-                                    <input type="checkbox" disabled>
+{{--                    @forelse($tasks as $task)--}}
+{{--                        <div class="mb-2">--}}
+{{--                            <div class="d-block px-3 py-1 bg-light" style="border-radius: 15px 15px 15px 15px">--}}
+{{--                                <div class="d-inline-block">--}}
+{{--                                    <input type="checkbox" disabled>--}}
 
-                                <span class="text-sm"
-                                @if($task->done==1)
-                                    style="text-decoration: line-through;color: white"
-                                    @endif
-                            >{{$task->task}}</span></div>
-                            </div>
-                        </div>
-                        @empty
-                            <p class="text-sm">هیچ وظیفه ای وجود ندارد</p>
-                            @endforelse
+{{--                                <span class="text-sm"--}}
+{{--                                @if($task->done==1)--}}
+{{--                                    style="text-decoration: line-through;color: white"--}}
+{{--                                    @endif--}}
+{{--                            >{{$task->task}}</span></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        @empty--}}
+{{--                            <p class="text-sm">هیچ وظیفه ای وجود ندارد</p>--}}
+{{--                            @endforelse--}}
                 </div>
             </div>
             <div class="accordion" id="setting">

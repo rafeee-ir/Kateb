@@ -1,13 +1,11 @@
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-//Vazir-font
 @import "~vazir-font/dist/font-face.css";
 body,*{
     font-family: 'Vazir', sans-serif;
