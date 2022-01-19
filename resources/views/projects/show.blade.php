@@ -54,7 +54,7 @@
             <div class="card mb-3">
                 <div class="card-header">وظایف</div>
                 <div class="card-body">
-                    <tasks></tasks>
+                    <tasks project_id="{{$project->id}}" user_id="{{Auth::id()}}"></tasks>
 {{--                    <form action="{{route('tasks.store')}}" method="post"  autocomplete="off">--}}
 {{--                        @csrf--}}
 {{--                        <input type="hidden" name="user_id" value="{{Auth::id()}}">--}}

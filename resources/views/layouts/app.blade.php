@@ -158,6 +158,7 @@
                         </div>
                     @endguest
                     <div class="col-lg-10">
+                        <check-online></check-online>
                     @yield('content')
                     </div>
                 </div>
