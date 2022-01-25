@@ -419,19 +419,22 @@
         @endif
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center">
-                <h1>Karamana</h1>
-            </div>
+            <a href="/dashboard">
+            <img src="/img/logo.png" alt="">
+            </a>
+{{--            <div class="flex justify-center">--}}
+{{--                <h1>Karamana</h1>--}}
+{{--            </div>--}}
 
 
 
 
                 <div class="text-center text-sm text-gray-500">
-                    Karaman v0.1 Beta (PHP v{{ PHP_VERSION }})
+                    Karamana v0.1 Beta (PHP v{{ PHP_VERSION }})
                 </div>
             </div>
         </div>
-    </div>
+
 </body>
 
 </html>

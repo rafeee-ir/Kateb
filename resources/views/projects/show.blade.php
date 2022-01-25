@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success mb-3 alert-dismissible fade show" role="alert">
-            {{ session('status') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-        </div>
-    @endif
 
     @if ($project->ended===1)
         <div class="alert alert-warning" role="alert">
@@ -44,7 +37,6 @@
                                 <span class="text-sm">{{$comment->comment}}</span>
                             </div>
                             <span class="badge bg-light text-secondary rounded-pill">{{$comment->when}}</span>
-
                         </div>
                         @empty
                             <p class="text-sm">اولین نظر را بنویسید</p>
@@ -55,31 +47,6 @@
                 <div class="card-header">وظایف</div>
                 <div class="card-body">
                     <tasks project_id="{{$project->id}}" user_id="{{Auth::id()}}"></tasks>
-{{--                    <form action="{{route('tasks.store')}}" method="post"  autocomplete="off">--}}
-{{--                        @csrf--}}
-{{--                        <input type="hidden" name="user_id" value="{{Auth::id()}}">--}}
-{{--                        <input type="hidden" name="project_id" value="{{$project->id}}">--}}
-{{--                        <div class="input-group input-group-sm mb-3">--}}
-{{--                            <input  autocomplete="off" type="text" class="form-control" placeholder="کارهایی که باید انجام شود..." name="task">--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-
-{{--                    @forelse($tasks as $task)--}}
-{{--                        <div class="mb-2">--}}
-{{--                            <div class="d-block px-3 py-1 bg-light" style="border-radius: 15px 15px 15px 15px">--}}
-{{--                                <div class="d-inline-block">--}}
-{{--                                    <input type="checkbox" disabled>--}}
-
-{{--                                <span class="text-sm"--}}
-{{--                                @if($task->done==1)--}}
-{{--                                    style="text-decoration: line-through;color: white"--}}
-{{--                                    @endif--}}
-{{--                            >{{$task->task}}</span></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @empty--}}
-{{--                            <p class="text-sm">هیچ وظیفه ای وجود ندارد</p>--}}
-{{--                            @endforelse--}}
                 </div>
             </div>
             <div class="accordion" id="setting">

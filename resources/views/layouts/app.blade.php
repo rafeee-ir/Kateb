@@ -13,8 +13,7 @@
         | {{$pageTitle}}
         @endisset
     </title>
-
-    <!-- Scripts -->
+    <link rel="icon" type="image/png" href="{{url('/img/logo.png')}}">
 
     <!-- Fonts -->
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
@@ -28,9 +27,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a href="{{ url('/') }}"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+
+                <img src="{{url('/img/logo.png')}}" height="50px" alt="">
                 </a>
+{{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
+{{--                    {{ config('app.name', 'Laravel') }}--}}
+{{--                </a>--}}
                 <span></span>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -98,68 +101,51 @@
 
         <main class="py-4">
             <div class="container">
-
+                @isset($pageTitle)
+                <h1 class="mb-3">{{$pageTitle}}</h1>
+                <hr>
+                @endisset
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 <div class="row justify-content-center">
                     @guest
                     @else
                     <div class="col-lg-2 mb-3">
-{{--                        <div class="card">--}}
-{{--                            <div class="card-header">{{ __('منو') }}</div>--}}
-{{--                            <div class="card-body">--}}
                                 <div class="list-group">
-{{--                                    <a href="#" id="time" class="list-group-item list-group-item-action disabled">--}}
-{{--                                    </a>--}}
-                                    <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
+                                    <a href="{{ route('home') }}" class="{{ request()->is('dashboard') ? 'active' : '' }} list-group-item list-group-item-action" >
                                         داشبورد
                                     </a>
-{{--                                    <a href="{{url('/user').'/'.Auth::id()}}" class="list-group-item list-group-item-action">پروفایل من</a>--}}
-{{--                                    <a href="{{ route('myActivities') }}" class="list-group-item list-group-item-action">فعالیت های من</a>--}}
-{{--                                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>--}}
                                 </div>
                                 <div class="list-group mt-3">
-                                    <a href="{{ route('projects.index') }}" class="list-group-item list-group-item-action">پروژه ها</a>
-                                    <a href="{{ route('projects.create') }}" class="list-group-item list-group-item-action">پروژه جدید</a>
+                                    <a href="{{ route('projects.index') }}" class="{{ request()->is('projects*') ? 'active' : '' }} list-group-item list-group-item-action">پروژه ها</a>
+                                    <a href="{{ route('projects.create') }}" class="{{ request()->is('projects/create') ? 'active' : '' }} list-group-item list-group-item-action">پروژه جدید</a>
+                                    <a href="{{ route('tickets.index') }}" class="{{ request()->is('tickets*') ? 'active' : '' }} list-group-item list-group-item-action">پشتیبانی</a>
 
 
                                 </div>
                                 <div class="list-group mt-3">
 
-                                    <a href="{{route('portfolios.index')}}" class="list-group-item list-group-item-action">نمونه کارها</a>
+                                    <a href="{{route('portfolios.index')}}"  class="{{ request()->is('portfolios*') ? 'active' : '' }} list-group-item list-group-item-action">نمونه کارها</a>
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">همکاران</a>
                                     <a href="#" class="list-group-item list-group-item-action disabled list-group-item-secondary">فاکتورها</a>
 
                                 </div>
                                 <div class="list-group mt-3">
-                                    <a href="{{ route('users') }}" class="list-group-item list-group-item-action">کاربران</a>
-                                    <a href="{{ route('activities') }}" class="list-group-item list-group-item-action">فعالیت ها</a>
+                                    <a href="{{ route('users') }}" class="{{ request()->is('users*') ? 'active' : '' }} list-group-item list-group-item-action">کاربران</a>
+                                    <a href="{{ route('activities') }}" class="{{ request()->is('activities*') ? 'active' : '' }} list-group-item list-group-item-action">فعالیت ها</a>
 
                                 </div>
-{{--                            </div>--}}
-{{--                        </div>--}}
 
-{{--                        <script type="text/javascript">--}}
-{{--                            function showTime() {--}}
-{{--                                var date = new Date(),--}}
-{{--                                    utc = new Date(Date.now(--}}
-{{--                                        date.getFullYear(),--}}
-{{--                                        date.getMonth(),--}}
-{{--                                        date.getDate(),--}}
-{{--                                        date.getHours(),--}}
-{{--                                        date.getMinutes(),--}}
-{{--                                        date.getSeconds()--}}
-{{--                                    ));--}}
-
-{{--                                document.getElementById('time').innerHTML = utc.toLocaleTimeString();--}}
-{{--                            }--}}
-{{--                            showTime();--}}
-
-{{--                            // setInterval(showTime, 1000);--}}
-{{--                        </script>--}}
                         </div>
                     @endguest
                     <div class="col-lg-10">
                         <check-online></check-online>
                     @yield('content')
+                        <hr>
+                        <p class="mt-3 text-sm-start text-secondary">مدیریت و پشتیبانی پروژه کارامانا</p>
                     </div>
                 </div>
             </div>

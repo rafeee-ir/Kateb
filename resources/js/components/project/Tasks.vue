@@ -3,8 +3,6 @@
 <!--        <div v-if="tasks" class="progress mb-2">-->
 <!--            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>-->
 <!--        </div>-->
-<!--        <div class="alert alert-danger" v-if="!isOnLine">Offline</div>-->
-<!--        <button @click.prevent="checkOnline">Check</button>-->
         <form v-on:submit.prevent="addTask" autocomplete="off">
             <div class="input-group input-group-sm mb-3">
                 <input  autocomplete="off" type="text" class="form-control" placeholder="کارهایی که باید انجام شود..." v-model="taskText">
@@ -17,7 +15,7 @@
                     <input v-on:change="taskIsDone(task.id,task.is_done)" :checked="task.is_done" type="checkbox" checked>
 
                     <span v-if="!task.is_done" class="text-sm">{{task.task}}</span>
-                    <span v-else class="text-sm text-decoration-line-through text-success">{{task.task}}{{task.is_done}}</span>
+                    <span v-else class="text-sm text-decoration-line-through text-success">{{task.task}}</span>
                 </div>
             </div>
         </div>
@@ -43,10 +41,6 @@
 
         },
         methods: {
-            // checkOnline(){
-            //     window.addEventListener('online', ()=>{this.isOnLine=true});
-            //     window.addEventListener('offline', ()=>{this.isOnLine=false});
-            // },
             addTask(){
                 axios.post('/v/task/add/',
                     {

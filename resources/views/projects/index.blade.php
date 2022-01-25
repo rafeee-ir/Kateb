@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
+
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">

@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 //Projects
     Route::resource('projects', \App\Http\Controllers\ProjectController::class);
+    Route::resource('tickets', \App\Http\Controllers\TicketController::class);
+    Route::resource('departments', \App\Http\Controllers\DepartmentController::class);
     Route::resource('comments', \App\Http\Controllers\CommentController::class);
     Route::resource('portfolios', \App\Http\Controllers\PortfolioController::class);
     Route::resource('tasks', \App\Http\Controllers\TaskController::class);
@@ -37,8 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
 //Vue Routes
     Route::get('/v/users/all',[\App\Http\Controllers\UserController::class,'getVueUsersAll']);
     Route::get('/v/project/tasks/{project}',[\App\Http\Controllers\TaskController::class,'getTasksOfTheProject']);
+    Route::get('/v/ticket/answers/{ticket}',[\App\Http\Controllers\TicketController::class,'getAnswersOfTheTicket']);
     Route::post('/v/task/done/',[\App\Http\Controllers\TaskController::class,'doneTask']);
     Route::post('/v/task/add/',[\App\Http\Controllers\TaskController::class,'addTask']);
+    Route::post('/v/ticket/answers/add/',[\App\Http\Controllers\TicketController::class,'addAnswer']);
 
 });
 
