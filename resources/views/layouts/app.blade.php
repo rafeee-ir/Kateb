@@ -134,7 +134,7 @@
 
                                 </div>
                                 <div class="list-group mt-3">
-                                    <a href="{{ route('users') }}" class="{{ request()->is('users*') ? 'active' : '' }} list-group-item list-group-item-action">کاربران</a>
+                                    <a href="{{ route('users.index') }}" class="{{ request()->is('users*') ? 'active' : '' }} list-group-item list-group-item-action">کاربران</a>
                                     <a href="{{ route('activities') }}" class="{{ request()->is('activities*') ? 'active' : '' }} list-group-item list-group-item-action">فعالیت ها</a>
 
                                 </div>

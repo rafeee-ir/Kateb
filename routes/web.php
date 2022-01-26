@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/activities', [App\Http\Controllers\LogController::class, 'index'])->name('activities');
     Route::get('/activities/me', [App\Http\Controllers\LogController::class, 'myActivities'])->name('myActivities');
-    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
-    Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user.show');
+//    Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+//    Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user.show');
 
 //Projects
     Route::resource('projects', \App\Http\Controllers\ProjectController::class);
@@ -44,8 +46,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/v/task/add/',[\App\Http\Controllers\TaskController::class,'addTask']);
     Route::post('/v/ticket/answers/add/',[\App\Http\Controllers\TicketController::class,'addAnswer']);
 
-});
 
+    Route::resource('users', UserController::class);
+
+
+    Route::resource('roles', RoleController::class);
+});
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

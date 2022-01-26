@@ -37,6 +37,16 @@
                                     <th scope="row">{{ __('تاریخ عضویت') }}</th>
                                     <td>{{$user->created_at}}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row">{{ __('نقش') }}</th>
+                                    <td>
+                                        @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames() as $v)
+                                                <label class="badge badge-success">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
 
