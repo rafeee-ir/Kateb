@@ -50,26 +50,26 @@
                                         @else
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home')}}">داشبورد</a>
+                            <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{route('home')}}">داشبورد</a>
                         </li>
                         @can('project-list')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('projects.index')}}">پروژه</a>
+                            <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="{{route('projects.index')}}">پروژه</a>
                         </li>
                         @endcan
                         @can('ticket-list')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('tickets.index')}}">پشتیبانی</a>
+                            <a class="nav-link {{ request()->is('tickets*') ? 'active' : '' }}" href="{{route('tickets.index')}}">پشتیبانی</a>
                         </li>
                         @endcan
                         @can('portfolio-list')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('portfolios.index')}}">نمونه کار</a>
+                            <a class="nav-link {{ request()->is('portfolios*') ? 'active' : '' }}" href="{{route('portfolios.index')}}">نمونه کار</a>
                         </li>
                         @endcan
                         @can('admin-list')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">مدیریت</a>
+                            <a class="nav-link {{ request()->is('admin*') ? 'active' : '' }}" href="#">مدیریت</a>
                         </li>
                         @endcan
 
