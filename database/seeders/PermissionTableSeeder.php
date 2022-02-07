@@ -45,6 +45,10 @@ class PermissionTableSeeder extends Seeder
             'comment-create',
             'comment-edit',
             'comment-delete',
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
         ];
 
         foreach ($permissions as $permission) {
