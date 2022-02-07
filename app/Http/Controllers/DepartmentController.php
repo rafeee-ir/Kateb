@@ -10,6 +10,20 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:department-list|department-create|department-edit|department-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:department-create', ['only' => ['create','store']]);
+        $this->middleware('permission:department-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:department-delete', ['only' => ['destroy']]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()

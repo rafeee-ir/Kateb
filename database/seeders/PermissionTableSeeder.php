@@ -15,6 +15,7 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'dashboard-visit',
             'admin',
             'role-list',
             'role-create',
@@ -40,6 +41,10 @@ class PermissionTableSeeder extends Seeder
             'task-create',
             'task-edit',
             'task-delete',
+            'comment-list',
+            'comment-create',
+            'comment-edit',
+            'comment-delete',
         ];
 
         foreach ($permissions as $permission) {

@@ -7,8 +7,9 @@
         </div>
     @endif
 
+    @can('project-list')
 
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-sm-4">
                                 <div class="card text-center">
                                     <div class="card-body">
@@ -30,7 +31,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                                @can('project-create')
+                            <div class="col-sm-2">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <h1 class="card-title">+</h1>
@@ -41,5 +43,20 @@
                                     </div>
                                 </div>
                             </div>
+                                @endcan
                         </div>
+    @endcan
+        <div class="row mb-3">
+                <div class="col-sm-2">
+                    <div class="card border-warning text-center">
+                        <div class="card-body">
+                            <h1 class="card-title">?</h1>
+                            <p class="card-text">
+                                تیکت پشتیبانی
+                            </p>
+                            <a href="{{route('tickets.create')}}" class="btn btn-success">ثبت تیکت</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
 @endsection

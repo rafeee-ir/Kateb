@@ -3,7 +3,7 @@
 <!--        <div v-if="tasks" class="progress mb-2">-->
 <!--            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>-->
 <!--        </div>-->
-        <form v-on:submit.prevent="addTask" autocomplete="off">
+        <form  v-can="'task-create'" v-on:submit.prevent="addTask" autocomplete="off">
             <div class="input-group input-group-sm mb-3">
                 <input  autocomplete="off" type="text" class="form-control" placeholder="کارهایی که باید انجام شود..." v-model="taskText">
             </div>
@@ -24,6 +24,7 @@
 
 <script>
     export default {
+
         props:[
             'project_id','user_id'
         ],
@@ -81,4 +82,5 @@
             },
         }
     }
+
 </script>

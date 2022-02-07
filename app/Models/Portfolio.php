@@ -9,4 +9,9 @@ class Portfolio extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function project(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

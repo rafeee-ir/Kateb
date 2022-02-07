@@ -9,6 +9,15 @@ const Task = require("./components/project/Tasks");
 
 window.Vue = require('vue').default;
 
+Vue.directive('can', function (el, binding, vnode) {
+
+    if(Permissions.indexOf(binding.value) !== -1){
+        return vnode.elm.hidden = false;
+    }else{
+        return vnode.elm.hidden = true;
+    }
+})
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -25,11 +34,18 @@ Vue.component('check-online', require('./components/CheckOnline').default);
 Vue.component('tasks', require('./components/project/Tasks.vue').default);
 Vue.component('tickets', require('./components/tickets/Tickets.vue').default);
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+// import { createApp } from 'vue'
+// import LaravelPermissionToVueJS from 'laravel-permission-to-vuejs'
+// import App from './components/App.vue'
+// const app = createApp(App)
+// app.use(LaravelPermissionToVueJS)
+// app.mount('#app')
 
 const app = new Vue({
     el: '#app',

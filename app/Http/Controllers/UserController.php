@@ -6,12 +6,28 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show','getVueUsersAll']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -156,4 +172,6 @@ class UserController extends Controller
         }
         return $users;
     }
+
+
 }

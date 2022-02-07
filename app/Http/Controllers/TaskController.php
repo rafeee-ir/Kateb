@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:task-list|task-create|task-edit|task-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:task-create', ['only' => ['create','store','addTask']]);
+        $this->middleware('permission:task-edit', ['only' => ['edit','update','doneTask']]);
+        $this->middleware('permission:task-delete', ['only' => ['destroy']]);
+    }
 
     /**
      * Display a listing of the resource.

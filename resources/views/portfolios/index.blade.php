@@ -1,14 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
-    <div class="mb-3 text-start">
-        <a href="{{route('portfolios.create')}}" class="btn btn-sm btn-outline-primary">نمونه کار جدید</a>
-    </div>
+{{--    <div class="mb-3 text-start">--}}
+{{--        <a href="{{route('portfolios.create')}}" class="btn btn-sm btn-outline-primary">نمونه کار جدید</a>--}}
+{{--    </div>--}}
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @forelse($portfolios as $portfolio)
         <div class="col">

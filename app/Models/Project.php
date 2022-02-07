@@ -16,4 +16,8 @@ class Project extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+    public function portfolio(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Portfolio::class);
+    }
 }

@@ -9,15 +9,14 @@
     @endif
     <div class="row">
         <div class="col-md-8">
-            <div class="card mb-3">
+            <div class="card mb-1">
                 <div class="card-body">
-
-
-                    <h1>{{$project->title}}</h1>
-                    <span>{{$project->when}}</span>
-                    <hr>
+                    <small class="text-muted">{{$project->when}}</small>
+                </div>
+            </div>
+            <div class="card mb-1">
+                <div class="card-body">
                     <p>{{$project->description}}</p>
-
                 </div>
             </div>
             <div class="card mb-3">
@@ -43,12 +42,18 @@
                             @endforelse
                 </div>
             </div>
+            @can('task-list')
+
             <div class="card mb-3">
                 <div class="card-header">وظایف</div>
                 <div class="card-body">
-                    <tasks project_id="{{$project->id}}" user_id="{{Auth::id()}}"></tasks>
+
+                        <tasks project_id="{{$project->id}}" user_id="{{Auth::id()}}"></tasks>
+
                 </div>
             </div>
+            @endcan
+
             <div class="accordion" id="setting">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">

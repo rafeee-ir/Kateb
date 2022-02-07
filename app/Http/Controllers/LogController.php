@@ -14,6 +14,20 @@ class LogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('permission:log-list|log-create|log-edit|log-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:log-create', ['only' => ['create','store']]);
+        $this->middleware('permission:log-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:log-delete', ['only' => ['destroy']]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     */
     public function index()
     {
         $logs = Log::all()->sortByDesc('created_at');

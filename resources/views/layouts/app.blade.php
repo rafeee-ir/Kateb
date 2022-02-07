@@ -48,20 +48,22 @@
                                                 </li>
                                             @endif
                                         @else
+{{--                        @can('project-list')--}}
 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{route('home')}}">داشبورد</a>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{route('home')}}">داشبورد</a>--}}
+{{--                        </li>--}}
+{{--                        @endcan--}}
                         @can('project-list')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="{{route('projects.index')}}">پروژه</a>
                         </li>
                         @endcan
-                        @can('ticket-list')
+{{--                        @can('ticket-list')--}}
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('tickets*') ? 'active' : '' }}" href="{{route('tickets.index')}}">پشتیبانی</a>
                         </li>
-                        @endcan
+{{--                        @endcan--}}
                         @can('portfolio-list')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('portfolios*') ? 'active' : '' }}" href="{{route('portfolios.index')}}">نمونه کار</a>
@@ -138,7 +140,16 @@
             </div>
         </main>
     </div>
+
+<script type="text/javascript">
+    @auth
+        window.Permissions = {!! json_encode(Auth::user()->allPermissions, true) !!};
+    @else
+        window.Permissions = [];
+    @endauth
+</script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 
 </body>
 
