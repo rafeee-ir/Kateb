@@ -58,8 +58,19 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'pic' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
 
+        ]);
         $portfolio = Portfolio::create($request->all());
+
+//        $name = $request->file('pic')->getClientOriginalName();
+        $path = $request->file('pic')->store('portfolios/images');
+//        $save = new Portfolio();
+//        $save->name = $name;
+        $portfolio->pic = $path;
+
+        $portfolio->save();
         Log::create([
             'code' => 103,
             'log' => 'افزودن نمونه کار '.$portfolio->id.' توسط '.Auth::user()->name,

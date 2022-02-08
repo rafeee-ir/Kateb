@@ -32,7 +32,7 @@
             <div class="card">
                 @if($portfolio->pic!==null)
                     <a rel="nofollow" href="{{$portfolio->link}}"target="_blank">
-                        <img title="مشاهده نمونه کار" src="{{$portfolio->pic}}" class="card-img-top img-fluid" style="object-fit: cover;height: 250px"  alt="{{Str::limit($portfolio->description,40)}}">
+                        <img title="مشاهده نمونه کار" src="{{asset('storage/'.$portfolio->pic)}}" class="card-img-top img-fluid" style="object-fit: cover;height: 250px"  alt="{{Str::limit($portfolio->description,40)}}">
                     </a>
                 @endif
                 <div class="card-body">

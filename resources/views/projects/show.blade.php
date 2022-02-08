@@ -124,6 +124,13 @@
                                         </div>
                                     </div>
                                 @endforelse
+                                    <div class="col">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-body">
+                                                <a href="{{route('portfolios.create')}}/?project_id={{$project->id}}&owner_id={{$project->owner_id}}" class="btn btn-outline-success">نمونه کار جدید</a>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
 
                         </div>

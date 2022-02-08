@@ -27,12 +27,12 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="start_date" class="form-label">تاریخ شروع</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                        <input value="<?php echo date('Y-m-d'); ?>" type="date" class="form-control" id="start_date" name="start_date" required>
                                     </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label for="end_date" class="form-label">تاریخ پایان</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                        <input value="<?php echo date("Y-m-d", strtotime("+7 day")); ?>" type="date" class="form-control" id="end_date" name="end_date" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
