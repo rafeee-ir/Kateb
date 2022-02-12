@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show','getVueUsersAll']]);
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','getVueUsersAll']]);
         $this->middleware('permission:user-create', ['only' => ['create','store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
@@ -83,15 +83,22 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function show($id)
     {
-
         $user = User::findorfail($id);
         $user->created_at = new Verta($user->created_at);
         $pageTitle= 'پروفایل ' . $user->name;
-        return view('profile', compact('user','pageTitle'));
+
+
+        if(Auth::user()->hasRole("Admin")) {
+            return view('profile', compact('user','pageTitle'));
+        }elseif (Auth::id()==$id){
+            return view('profile', compact('user','pageTitle'));
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**

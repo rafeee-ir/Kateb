@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-lg-6 col-md-6 col-sm-10 mb-3">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('بازیابی رمز') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,11 +16,12 @@
 
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
+                        <div class="row justify-content-center">
+                            <div class="col-md-10">
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                            <div class="mb-2">
+                                <label for="email">{{ __('پست الکترونیکی') }}</label>
 
-                            <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -29,13 +30,12 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-warning">
+                                        {{ __('ارسال لینک تغییر رمز به ایمیل') }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

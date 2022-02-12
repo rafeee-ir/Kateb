@@ -44,7 +44,7 @@
 
                                             @if (Route::has('register'))
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('register') }}">{{ __('ثبت نام') }}</a>
+                                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ثبت نام') }}</a>
                                                 </li>
                                             @endif
                                         @else
@@ -83,7 +83,7 @@
 
                                                 <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{url('/users').'/'.Auth::id()}}">
+                                                        <a class="dropdown-item" href="{{route('users.show',Auth::id())}}">
                                                             {{ __('پروفایل من') }}
                                                         </a>
                                                     </li>
