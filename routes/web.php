@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('departments', \App\Http\Controllers\DepartmentController::class);
     Route::resource('comments', \App\Http\Controllers\CommentController::class);
     Route::resource('tasks', \App\Http\Controllers\TaskController::class);
+    Route::resource('sites', \App\Http\Controllers\SiteController::class);
 
 
 
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/v/task/done/',[\App\Http\Controllers\TaskController::class,'doneTask']);
     Route::post('/v/task/add/',[\App\Http\Controllers\TaskController::class,'addTask']);
     Route::post('/v/ticket/answers/add/',[\App\Http\Controllers\TicketController::class,'addAnswer']);
+    Route::post('/v/ticket/answers/done/',[\App\Http\Controllers\TicketController::class,'doneAnswer']);
 
 
     Route::resource('users', UserController::class);

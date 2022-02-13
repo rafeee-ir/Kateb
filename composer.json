@@ -8,7 +8,7 @@
         "php": "^7.3|^8.0",
         "ahmedsaoud31/laravel-permission-to-vuejs": "dev-master",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.4",
         "hekmatinasser/verta": "^1.12",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",

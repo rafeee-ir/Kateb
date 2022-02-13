@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
+{{--    @if (session('status'))--}}
+{{--        <div class="alert alert-success" role="alert">--}}
+{{--            {{ session('status') }}--}}
+{{--        </div>--}}
+{{--    @endif--}}
     <div class="card">
         <!--        <div class="card-header">وضعیت تیکت ها</div>-->
         <div class="card-body">
@@ -57,8 +57,9 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <div>
+                    @can('department-index')
                     <a href="{{route('departments.index')}}" class="btn btn-sm btn-outline-dark">دپارتمان ها</a>
-
+                    @endcan
                 </div>
                 <div>
                     <a href="{{route('tickets.create')}}" class="btn btn-sm btn-warning">ارسال تیکت جدید</a>

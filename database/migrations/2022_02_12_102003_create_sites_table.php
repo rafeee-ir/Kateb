@@ -15,6 +15,14 @@ class CreateSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('url');
+            $table->string('cms');
+            $table->boolean('isShop')->default(0);
+            $table->boolean('sellPhysicalProducts')->default(0);
+            $table->integer('howManyPeopleAreWorkingOnSite')->default(1);
+            $table->integer('user_id');
+            $table->integer('owner_id');
             $table->timestamps();
         });
     }

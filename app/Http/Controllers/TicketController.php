@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\log;
 use App\Models\Ticket;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class TicketController extends Controller
         $this->middleware('auth');
 
 //        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:ticket-create', ['only' => ['create','store']]);
+//        $this->middleware('permission:ticket-create', ['only' => ['create','store']]);
         $this->middleware('permission:ticket-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
     }
@@ -88,6 +89,7 @@ class TicketController extends Controller
         $tickets_stats=$this->ticketsStats();
 
         return view('tickets.index',compact('pageTitle','tickets','tickets_stats'));
+
     }
 
     /**
@@ -107,14 +109,22 @@ class TicketController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $ticket = Ticket::create($request->all());
 
-
-        return redirect()->route('tickets.index')->with('status','تیکت پشتبانی با کد '.$ticket->id.'  با موفقیت ثبت شد');
+        Log::create([
+            'code' => 1111,
+            'log' => 'ثبت تیکت پشتیبانی با کد '.$ticket->id.' توسط '. Auth::user()->name,
+            'user_id' => Auth::id()
+        ]);
+//        return redirect()->route('tickets.index')->with('status','تیکت پشتبانی با کد '.$ticket->id.'  با موفقیت ثبت شد');
+        $success = 'تیکت شما با موفقیت ایجاد شد';
+        $code = $ticket->id;
+        $text = 'متوسط زمان پاسخگویی به تیکت شما 2 ساعت است. در صورتی که نیاز شما فوری است. لطفا از طریق تماس با واتساپ، کد پیگیری خود را برای ما ارسال نمایید.';
+        return view('success',compact('success','code','text'));
 
     }
 
@@ -178,7 +188,7 @@ class TicketController extends Controller
     }
 
     public function getAnswersOfTheTicket($ticket){
-        $tickets = Ticket::where('reply_to',$ticket)->get();
+        $tickets = Ticket::where('reply_to',$ticket)->latest()->get();
         foreach ($tickets as $ticket){
             $v = new Verta($ticket->created_at);
             $t = $v->formatDifference();
@@ -199,15 +209,24 @@ class TicketController extends Controller
         }
 
         $ticketReply->update();
+        Log::create([
+            'code' => 1111,
+            'log' => 'ثبت پاسخ در تیکت پشتیبانی با کد '.$ticketReply->id.' توسط '. Auth::user()->name,
+            'user_id' => Auth::id()
+        ]);
+        return $this->getAnswersOfTheTicket($ticket->reply_to);
 
-
-//        Log::create([
-//            'code' => 181,
-//            'log' => 'ثبت وظیفه '.$task->task.' توسط '. Auth::user()->name,
-//            'project_id' => $request->project_id,
-//            'user_id' => Auth::id()
-//        ]);
-
+    }
+    public function doneAnswer(Request $request){
+        $ticket = Ticket::create($request->all());
+        $ticketReply = Ticket::find($ticket->reply_to);
+        $ticketReply->status = 4;
+        $ticketReply->update();
+        Log::create([
+            'code' => 1111,
+            'log' => 'ثبت پایان تیکت پشتیبانی کد '.$ticketReply->id.' توسط '. Auth::user()->name,
+            'user_id' => Auth::id()
+        ]);
         return $this->getAnswersOfTheTicket($ticket->reply_to);
 
     }

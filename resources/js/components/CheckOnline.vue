@@ -14,9 +14,22 @@ export default {
         }
         },
     mounted() {
+        console.log('CheckOnline Mounted');
+        this.test();
         window.addEventListener('online', ()=>{this.isOnLine=true});
         window.addEventListener('offline', ()=>{this.isOnLine=false});
     },
+    methods:{
+        test(){
+
+            axios.get('http://shoorak.ir/wp-json/wp/v2/posts')
+            .then(response => {
+                console.log(response.getResponseHeader('x-wp-total'))
+            });
+
+
+        }
+    }
 }
 </script>
 

@@ -147,6 +147,7 @@
     @else
         window.Permissions = [];
     @endauth
+
 </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 

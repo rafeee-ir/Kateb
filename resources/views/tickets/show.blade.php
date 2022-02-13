@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    @if($ticket->status==4)
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <strong>این تیکت بسته است</strong> برای باز کردن مجدد تیکت کافی است یک پاسخ جدید ارسال کنید
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -24,14 +31,6 @@
     </div>
     <tickets :user="{{Auth::user()}}" :department_id="{{$ticket->department_id ?? 0}}" :project_id="{{$ticket->project->id ?? 0}}" :ticket_user_id="{{$ticket->user_id}}" :ticket_id="{{$ticket->id}}"></tickets>
 
-    <div class="card mt-1">
-        <div class="card-body">
-            <div  class="d-flex justify-content-between">
-                <div></div>
-                <div>
-                    <button class="btn btn-sm btn-outline-success">بستن تیکت</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
+

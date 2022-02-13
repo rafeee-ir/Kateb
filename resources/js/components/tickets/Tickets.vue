@@ -5,8 +5,8 @@
             <div  v-if="!showAddingForm" class="d-flex justify-content-between">
                 <div></div>
                 <div>
-                    <button class="btn btn-sm btn-warning" @click="showAddingForm=true">ارسال پاسخ</button>
-
+                    <button v-if="showDoneBtn" class="btn btn-sm btn-primary" @click="showAddingForm=true">ارسال پاسخ</button>
+                    <button v-if="!showDoneBtn" class="btn btn-sm btn-warning" @click="showAddingForm=true">باز کردن تیکت</button>
                 </div>
             </div>
             <form @submit.prevent="addAnswer" v-if="showAddingForm" class="form">
@@ -76,6 +76,16 @@
             </div>
         </div>
     </div>
+    <div v-if="showDoneBtn&&!showAddingForm" class="card mt-1">
+        <div class="card-body">
+            <div  class="d-flex justify-content-between">
+                <div></div>
+                <div>
+                    <button @click="doneAnswer" class="btn btn-sm btn-outline-success">بستن تیکت</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -87,13 +97,14 @@ export default {
         'ticket_id',
         'ticket_user_id',
         'project_id',
-        'department_id'
+        'department_id',
     ],
     data(){
         return{
             showAddingForm:false,
             body:'',
-            answers:[]
+            answers:[],
+            showDoneBtn:true
         }
     },
     mounted() {
@@ -107,7 +118,6 @@ export default {
                 });
         },
         addAnswer() {
-
             axios.post('/v/ticket/answers/add/',
                 {
                     user_id: this.user.id,
@@ -120,10 +130,24 @@ export default {
                     this.answer = '';
                     this.answers = response.data;
                     this.showAddingForm=false
+                }
+        )},
+        doneAnswer() {
+            axios.post('/v/ticket/answers/done/',
+                {
+                    user_id: this.user.id,
+                    project_id: this.project_id,
+                    reply_to: this.ticket_id,
+                    department_id: this.department_id,
+                    body: 'تیکت بسته شد'
+                },
+                {}).then(response => {
+                    this.showDoneBtn=false;
+                    this.answer = '';
+                    this.answers = response.data;
+                    this.showAddingForm=false
             }
-        );
-
-        },
+        )},
     }
 }
 </script>
