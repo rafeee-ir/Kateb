@@ -149,7 +149,7 @@ class TicketController extends Controller
         $t = $v->formatDifference();
         $ticket->when = $t;
         $ticket->created_at = new Verta($ticket->created_at);
-        return view('tickets.show',compact('ticket','pageTitle'));
+        return view('tickets.show',compact('ticket'));
     }
     }
 

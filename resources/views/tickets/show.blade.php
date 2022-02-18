@@ -18,12 +18,11 @@
                 <small class="text-muted">{{$ticket->when}} | {{$ticket->created_at}}</small>
             </div>
 
-        </div>
-    </div>
-    <div class="card mt-1">
-        <div class="card-body">
-            <div class="">
+
+            <div class="mt-3">
+                @isset($ticket->project->title)
                 <div class="badge bg-dark text-light">پروژه {{$ticket->project->title ?? ''}}</div>
+                @endisset
                 <h2>{{$ticket->title}}</h2>
                 <p>{{$ticket->body}}</p>
             </div>
